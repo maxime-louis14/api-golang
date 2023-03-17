@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app
+    command: go run cmd/main.go -b 0.0.0.0
+
+  db:
+  image: mysql
+  restart: always
+  environment:
+    MYSQL_DATABASE: materiels
+    MYSQL_USER: nws_app
+    MYSQL_PASSWORD: "${DB_PASSWORD}"
+    MYSQL_ROOT_PASSWORD: 1234
+  ports:
+  - 3306:3306
+  volumes:
+   - mysqldb-data:/var/lib/mysql
