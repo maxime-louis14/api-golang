@@ -2,19 +2,20 @@ package main
 
 import (
 	"log"
-    "github.com/maxime-louis14/api-golang/database"
+
 	"github.com/gofiber/fiber/v2"
+	"github.com/maxime-louis14/api-golang/database"
 )
 
 func welcome(c *fiber.Ctx) error {
-    return c.SendString("Welcome to my awsome API")
+	return c.SendString("Welcome to my awsome API")
 }
 
 func main() {
-    database.ConnectDb()
-    app := fiber.New()
+	database.ConnectDb()
+	app := fiber.New()
 
-    app.Get("/api", welcome)
+	app.Get("/api", welcome)
 
-    log.Fatal(app.Listen(":3000"))
+	log.Fatal(app.Listen(":3000"))
 }

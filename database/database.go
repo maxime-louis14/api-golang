@@ -3,6 +3,7 @@ package database
 import (
 	"log"
 	"os"
+
 	"github.com/maxime-louis14/api-golang/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -16,7 +17,7 @@ type DbInstance struct {
 var database DbInstance
 
 func ConnectDb() {
-	db, err := gorm.Open(mysql.Open("maka:12345@tcp(bdGolang)/api-golang"), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open("root:1234@tcp(bdGolang)/api-golang"), &gorm.Config{})
 
 	if err != nil {
 		log.Fatal("Failed to connect to the database! \n", err.Error())
@@ -24,7 +25,7 @@ func ConnectDb() {
 	}
 	log.Println("Connected to the database successfully")
 	db.Logger = logger.Default.LogMode(logger.Info)
-	log.Panicln("Running Migrations")
+	log.Println("Running Migrations")
 	// TODO: Add migrations
 	db.AutoMigrate(&models.User{}, &models.Product{}, &models.Order{})
 
