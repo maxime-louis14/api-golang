@@ -1,13 +1,20 @@
 package main
 
-import ("github.com/gofiber/fiber/v2")
+import (
+	"log"
+    "github.com/maxime-louis14/api-golang/database"
+	"github.com/gofiber/fiber/v2"
+)
+
+func welcome(c *fiber.Ctx) error {
+    return c.SendString("Welcome to my awsome API")
+}
 
 func main() {
+    database.ConnectDb()
     app := fiber.New()
 
-    app.Get("/", func(c *fiber.Ctx) error {
-        return c.SendString("Hello, World!")
-    })
+    app.Get("/api", welcome)
 
-    app.Listen(":3000")
+    log.Fatal(app.Listen(":3000"))
 }

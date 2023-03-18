@@ -18,10 +18,11 @@ services:
   db:
     image: mysql
     restart: always
+    container_name: bdGolang
     environment:
       MYSQL_DATABASE: api-golang
-      MYSQL_USER: nws_app
-      MYSQL_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_USER: maka
+      MYSQL_PASSWORD:   
       MYSQL_ROOT_PASSWORD: 1234
     ports:
     - 3306:3306
