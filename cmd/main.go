@@ -20,9 +20,13 @@ func setupRoutes(app *fiber.App) {
 	app.Get("/api/users", routes.GetUsers)
 	app.Get("/api/users/:id", routes.GetUser)
 	app.Put("/api/users/:id", routes.UpdateUser)
-	app.Delete("/api/users/:id", routes.DeleteUser)
+	app.Delete("/api/user/:id", routes.DeleteUser)
 	// Product endpoints
-	app.Post("api/products", routes.CreateProduct)
+	app.Post("api/recettes", routes.CreateRecette)
+	app.Get("/api/recettes", routes.GetRecettes)
+	app.Get("/api/recettes/:id", routes. GetRecette)
+	app.Put("/api/recettes/:id", routes.UpdateRecette)
+	app.Delete("/api/recette/:id", routes.DeleteRecette)
 }
 
 func main() {
@@ -30,6 +34,6 @@ func main() {
 	app := fiber.New()
 
 	setupRoutes(app)
-	
+
 	log.Fatal(app.Listen(":3000"))
 }
