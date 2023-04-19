@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   web:
-    depends_on: [db]
-    build: 
+    depends_on: [ db ]
+    build:
       dockerfile: Dockerfile
     environment:
       DATABASE_URL: "${DATABASE_URL}" # URL DB
@@ -22,15 +22,34 @@ services:
     environment:
       MYSQL_DATABASE: api-golang
       MYSQL_USER: maka
-      MYSQL_PASSWORD:   
+      MYSQL_PASSWORD:
       MYSQL_ROOT_PASSWORD: 1234
     ports:
-    - 3306:3306
+      - 3306:3306
     volumes:
-    - mysqldb-data:/var/lib/mysql
-    
+      - mysqldb-data:/var/lib/mysql
+  
+  mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+  app:
+    build: .
+    depends_on:
+      - mongo
+    environment:
+      MONGODB_URI: mongodb://mongo:27017
+
   phpmyadmin:
-    depends_on: [db]
+    depends_on: [ db ]
     image: phpmyadmin
     restart: always
     environment:
