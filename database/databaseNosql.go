@@ -19,7 +19,7 @@ func ConnectNosql() {
 	ctx := context.Background()
 
 	// Configuration de l'URI de la base de données MongoDB
-	uri := "mongodb://mongo:27017"
+	uri := "mongodb://root:example@mongo:27017/"
 
 	// Configuration des options de connexion
 	clientOptions := options.Client().ApplyURI(uri)
