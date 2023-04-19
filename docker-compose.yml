@@ -28,7 +28,7 @@ services:
       - 3306:3306
     volumes:
       - mysqldb-data:/var/lib/mysql
-  
+
   mongo:
     image: mongo:latest
     restart: always
@@ -41,12 +41,10 @@ services:
       - "8081:8081"
     environment:
       ME_CONFIG_MONGODB_SERVER: mongo
-  app:
+      MONGODB_URI: mongodb://mongo:27017
     build: .
     depends_on:
       - mongo
-    environment:
-      MONGODB_URI: mongodb://mongo:27017
 
   phpmyadmin:
     depends_on: [ db ]
